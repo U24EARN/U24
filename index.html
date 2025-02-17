@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>warner movies</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+    .top-bar {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+    /* Add this rule for the h2 */
+    .top-bar h2 {
+        font-family: Kristen ITC; 
+    }
+    .carousel img {
+        width: 20%;
+        max-height: 70vh; /* Optional: Limits max height to 70% of viewport height */
+        border-radius: 10px;
+    }
+    .announcement {
+	    display: flex;
+        overflow-x: auto;
+        background-color: #ffe6cc;
+        padding: 10px;
+        text-align: center;
+        color: #e67e22;
+	border-radius: 10px;
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+    .icon-menu {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 10px 10px;
+        background-color: #fff;
+        border-radius: 30px;
+        margin: 10px;
+        gap: 20px;
+    }
+    .icon-menu .menu-item {
+        text-align: center;
+        color: #555;
+        display: inline-block;
+        width: 80px;
+    }
+    .participation-section {
+        margin: 20px 10px;
+    }
+    .participation-section .card {
+	margin-bottom: 10px;
+        border-radius: 10px;
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .participation-section .card img {
+        width: 100%;
+        border-radius: 4px;
+    }
+    .star-rating {
+        color: #f39c12;
+    }
+    .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        background-color: #fff;
+        padding: 10px 0;
+        border-top: 1px solid #ddd;
+    }
+    .bottom-nav a {
+        color: #777;
+        text-align: center;
+        font-size: 14px;
+    }
+    .icon-blue {
+        color: #007bff; /* Blue color for icons */
+    }
+</style>
+
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <img src="S.png" alt="Logo" width="40" height="40">
+        <h2 class="m-0">WARNER MOVIES</h2>
+        <button class="btn btn-outline-secondary icon-blue"><i class="bi bi-translate"></i></button>
+    </div>
+
+    <!-- Carousel Section -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="a.jpg" class="d-block w-100" alt="Movie 1">
+            </div>
+            <div class="carousel-item">
+                <img src="p.jpg" class="d-block w-100" alt="Movie 2">
+            </div>
+            <div class="carousel-item">
+                <img src="c.jpg" class="d-block w-100" alt="Movie 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Announcement Section -->
+    <div class="announcement">
+        📢 new members can choose either a $30 one-year membership or a $45 two-year membership or choose to participate in other special time limited offers. referral bonuses are awarded and a cash back is awarded to a participant that will invite more than 15 people.
+    </div>
+
+    <!-- Horizontal Scrollable Icon Menu -->
+    <div class="icon-menu container">
+        <a href="#" class="menu-item">
+            <i class="bi bi-person-circle icon-blue" style="font-size: 24px;"></i>
+            <p>Profile</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-chat-dots icon-blue" style="font-size: 24px;"></i>
+            <p>Chat Room</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-book icon-blue" style="font-size: 24px;"></i>
+            <p>Guide</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-person-plus icon-blue" style="font-size: 24px;"></i>
+            <p>Invite</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-gear icon-blue" style="font-size: 24px;"></i>
+            <p>Settings</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-wallet2 icon-blue" style="font-size: 24px;"></i>
+            <p>Recharge</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-cash-stack icon-blue" style="font-size: 24px;"></i>
+            <p>Withdraw</p>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="bi bi-life-preserver icon-blue" style="font-size: 24px;"></i>
+            <p>Service</p>
+        </a>
+    </div>
+
+    <!-- Participation Section -->
+    <div class="participation-section container">
+        <h5>Participation Area</h5>
+        <div class="card">
+            <div class="row">
+                <div class="col-4">
+                    <img src="c.jpg" alt="Captain America">
+                </div>
+                <div class="col-8">
+                    <h6>Captain America: Brave New World</h6>
+                    <p>Participation: 125,000</p>
+                    <p>Divided method: Daily divided</p>
+			<p>Daily divided: 19459.05</p>
+                    <p>Concern index: <span class="star-rating">★★★★★</span></p>
+                    <p>Progress: <progress value="70" max="100"></progress></p>
+                </div>
+            </div>
+        </div>
+
+
+	 <div class="card">
+            <div class="row">
+                <div class="col-4">
+                    <img src="p.jpg" alt="oblivion">
+                </div>
+                <div class="col-8">
+                    <h6>OBLIVION</h6>
+                    <p>Participation: 325,000</p>
+                    <p>Divided method: Daily divided</p>
+		<p>Daily divided: 39459.05</p>
+                    <p>Concern index: <span class="star-rating">★★★★★</span></p>
+                    <p>Progress: <progress value="20" max="100"></progress></p>
+                </div>
+            </div>
+        </div>
+
+	     <div class="card">
+            <div class="row">
+                <div class="col-4">
+                    <img src="r.jpg" alt="FUTURE WAR">
+                </div>
+                <div class="col-8">
+                    <h6>FUTURE WARS</h6>
+                    <p>Participation: 525,000</p>
+                    <p>Divided method: Daily divided</p>
+		<p>Daily divided: 59459.05</p>
+                    <p>Concern index: <span class="star-rating">★★★★★</span></p>
+                    <p>Progress: <progress value="47" max="100"></progress></p>
+                </div>
+            </div>
+        </div>
+	    
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="index.html"><i class="bi bi-house-door icon-blue"></i><br>Home</a>
+        <a href="hot.html"><i class="bi bi-fire icon-blue"></i><br>Hot</a>
+        <a href="team.html"><i class="bi bi-people icon-blue"></i><br>Team</a>
+        <a href="tasks.html"><i class="bi bi-list-task icon-blue"></i><br>Task</a>
+        <a href="my.html"><i class="bi bi-person icon-blue"></i><br>My</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

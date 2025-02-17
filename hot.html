@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOT</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        /* Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #f8f9fa;
+        }
+        .language-icon {
+            width: 60px;
+            cursor: pointer;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px;
+        }
+        .logo {
+            width: 60px;
+        }
+        .participation-info {
+            background: #feb47b;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            margin-top: 10px;
+        }
+
+        /* Dividend Section */
+        .dividend-section .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .dividend-section .amount {
+            font-size: 1.2em;
+            color: #ff7e5f;
+        }
+        .movie-poster {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            background-color: #ff7e5f;
+        }
+
+        /* Bottom Navigation */
+        .navbar a {
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Section -->
+    <div class="top-bar d-flex justify-content-end align-items-center p-2">
+        <img src="S.png" class="language-icon" alt="">
+    </div>
+
+    <!-- Welcome Section -->
+    <div class="welcome-section text-center p-3">
+        <img src="S.png" class="logo" alt="NEWHS Logo">
+        <h1>Welcome to Warner Movies</h1>
+        <p>Watch movie trailers for free</p>
+        <p>Start your wealth journey</p>
+        <div class="participation-info">
+            Already participated 355 Days 23 : 56 : 06
+        </div>
+    </div>
+
+    <!-- Dividend Section -->
+    <div class="container dividend-section">
+        <div class="card mb-3 p-3">
+            <div class="row">
+                <div class="col text-center">
+                    <span class="amount">Sh6525.92</span><br>
+                    <small>Daily dividend</small>
+                </div>
+                <div class="col text-center">
+                    <span class="amount">70</span><br>
+                    <small>Dividend period</small>
+                </div>
+                <div class="col text-center">
+                    <span class="amount">Sh246619.1</span><br>
+                    <small>Participation amount</small>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-4">
+                    <img src="c.jpg" class="img-fluid movie-poster" alt="Movie Poster">
+                </div>
+                <div class="col-8">
+                    <h5>Captain America: Brave New World</h5>
+                    <p>Participation: 123.31 Million</p>
+                    <p>Dividend method: Daily dividend</p>
+                    <p>Concern index: ⭐⭐⭐⭐⭐</p>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 20%;"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-warning btn-block mt-3">Join now</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation with Bootstrap Icons -->
+    <nav class="navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
+        <a href="index.html" class="nav-link text-center"><i class="bi bi-house-door"></i><br>Home</a>
+        <a href="hot.html" class="nav-link text-center"><i class="bi bi-fire"></i><br>Hot</a>
+        <a href="team.html" class="nav-link text-center"><i class="bi bi-people"></i><br>Team</a>
+        <a href="tasks.html" class="nav-link text-center"><i class="bi bi-clipboard-check"></i><br>Task</a>
+        <a href="my.html" class="nav-link text-center"><i class="bi bi-person"></i><br>My</a>
+    </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Countdown Timer
+        function startCountdown() {
+            const participationInfo = document.querySelector('.participation-info');
+            let countdown = 355 * 24 * 60 * 60 + 23 * 60 * 60 + 56 * 60 + 6; // Initial countdown in seconds
+
+            setInterval(() => {
+                if (countdown <= 0) return;
+                countdown--;
+
+                const days = Math.floor(countdown / (24 * 60 * 60));
+                const hours = Math.floor((countdown % (24 * 60 * 60)) / 3600);
+                const minutes = Math.floor((countdown % 3600) / 60);
+                const seconds = countdown % 60;
+
+                participationInfo.textContent = `Already participated ${days} Days ${hours} : ${minutes} : ${seconds}`;
+            }, 1000);
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
