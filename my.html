@@ -25,31 +25,35 @@
       border-radius: 10px;
       margin: 20px;
       text-align: center;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .balance-card div {
+      flex: 1;
+    }
+    .balance-amount {
+      font-size: 1.5em;
+      color: green;
+    }
+    .withdraw-card {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px;
     }
     .withdraw-card button {
       flex: 1;
       margin: 5px;
-      padding: 12px;
+      padding: 10px;
       border-radius: 25px;
       font-weight: bold;
-      transition: 0.3s;
     }
     .withdraw-btn {
       background-color: #ffffff;
       color: black;
       border: 1px solid #e0e0e0;
     }
-    .withdraw-btn:hover {
-      background-color: #e0e0e0;
-    }
     .recharge-btn {
       background: linear-gradient(to right, #ff7e5f, #feb47b);
       color: white;
       border: none;
-    }
-    .recharge-btn:hover {
-      opacity: 0.9;
     }
     .vip-section {
       background: linear-gradient(145deg, #594f4f, #3d3d3d);
@@ -75,22 +79,16 @@
     .service-item:last-child {
       border-bottom: none;
     }
-    .service-item i {
-      color: #ff7e5f;
-    }
     .bottom-nav .nav-item {
       font-size: 0.85em;
-      color: #6c757d;
     }
     .bottom-nav .nav-item i {
       font-size: 24px;
     }
-    .bottom-nav .nav-item.active {
-      color: #007bff;
-    }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header d-flex justify-content-between align-items-center">
     <div>
       <img src="m3.jpg" alt="Logo" style="width: 40px; border-radius: 50px">
@@ -103,7 +101,8 @@
     </div>
   </header>
 
-  <section class="balance-card container-fluid">
+  <!-- Balance Card -->
+  <section class="balance-card">
     <div>
       <div class="balance-amount">Sh 43253.19</div>
       <div>≈11.40 usdt</div>
@@ -116,51 +115,66 @@
     </div>
   </section>
 
+  <!-- VIP Section -->
   <section class="vip-section">
     <h5>VIP</h5>
-    <p>Expires in <span id="countdown"></span></p>
+    <p>Expires 2025-10-19</p>
     <button class="btn btn-light btn-sm">Renew <i class="fas fa-chevron-right"></i></button>
   </section>
 
-  <section class="withdraw-card container-fluid">
+  <!-- Withdraw and Recharge Buttons -->
+  <section class="withdraw-card">
     <button class="withdraw-btn">Withdraw</button>
     <button class="recharge-btn">Recharge</button>
   </section>
 
+  <!-- My Service Section -->
+  <section class="services-section">
+    <h5>My Service</h5>
+    <div class="service-item">
+      <div><i class="fas fa-chart-line text-warning"></i> My Holdings</div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="service-item">
+      <div><i class="fas fa-folder text-danger"></i> Collect</div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="service-item">
+      <div><i class="fas fa-user-friends text-orange"></i> Follow</div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="service-item">
+      <div><i class="fas fa-headset text-info"></i> Service</div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="service-item">
+      <div><i class="fas fa-wallet text-primary"></i> Recharge</div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </section>
+
+  <!-- Bottom Navigation -->
   <nav class="bottom-nav navbar fixed-bottom navbar-light bg-light d-flex justify-content-around">
-    <a href="home.html" class="nav-item nav-link text-center active">
-      <i class="fas fa-home"></i><br>Home
+    <a href="home.html" class="nav-item nav-link text-center">
+      <i class="fas fa-home text-secondary"></i><br>Home
     </a>
     <a href="hot.html" class="nav-item nav-link text-center">
-      <i class="fas fa-fire"></i><br>Hot
+      <i class="fas fa-fire text-secondary"></i><br>Hot
     </a>
     <a href="team.html" class="nav-item nav-link text-center">
-      <i class="fas fa-sitemap"></i><br>Team
+      <i class="fas fa-sitemap text-secondary"></i><br>Team
     </a>
     <a href="tasks.html" class="nav-item nav-link text-center">
-      <i class="fas fa-tasks"></i><br>Task
+      <i class="fas fa-tasks text-secondary"></i><br>Task
     </a>
     <a href="my.html" class="nav-item nav-link text-center">
-      <i class="fas fa-user"></i><br>My
+      <i class="fas fa-user text-secondary"></i><br>My
     </a>
   </nav>
 
-  <script>
-    function startCountdown() {
-      const expiryDate = new Date("2025-10-19T00:00:00").getTime();
-      setInterval(function () {
-        let now = new Date().getTime();
-        let distance = expiryDate - now;
-
-        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      }, 1000);
-    }
-    startCountdown();
-  </script>
+  <!-- Bootstrap and jQuery scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
