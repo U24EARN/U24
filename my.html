@@ -150,7 +150,7 @@
     </div>
     <div class="d-flex justify-content-between">
       <button id="back-btn" class="btn btn-secondary btn-block mt-3 mr-2" onclick="window.location.href='home.html'">Back</button>
-      <button id="logout-btn" class="btn btn-danger btn-block mt-3" onclick="logout()">Logout</button>
+      <button id="logout-btn" class="btn btn-danger btn-block mt-3" onclick="window.location.href='index.html'">Logout</button>
     </div>
   </section>
 
@@ -168,21 +168,6 @@
         reader.readAsDataURL(file);
       }
     });
-
-    function logout() {
-      // Close the current page and redirect to index.html
-      window.location.href = 'index.html';
-      // Prevent access to this page after logout
-      localStorage.removeItem('isLoggedIn');
-    }
-
-    // Check if the user is logged in
-    window.onload = function() {
-      const isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (!isLoggedIn) {
-        window.location.href = 'index.html'; // Redirect to login page if not logged in
-      }
-    };
   </script>
 </body>
 </html>
