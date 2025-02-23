@@ -121,7 +121,7 @@
 
   <!-- Withdraw and Recharge Buttons -->
   <section class="withdraw-card">
-    <button class="withdraw-btn">Withdraw</button>
+    <button class="withdraw-btn" onclick="window.location.href='withdraw.html'">Withdraw</button>
     <button class="recharge-btn">Recharge</button>
   </section>
 
@@ -148,7 +148,10 @@
       <div><i class="fas fa-wallet text-primary"></i> Recharge</div>
       <i class="fas fa-chevron-right"></i>
     </div>
-    <button id="logout-btn" class="btn btn-danger btn-block mt-3">Logout</button>
+    <div class="d-flex justify-content-between">
+      <button id="back-btn" class="btn btn-secondary btn-block mt-3 mr-2" onclick="window.location.href='home.html'">Back</button>
+      <button id="logout-btn" class="btn btn-danger btn-block mt-3" onclick="logout()">Logout</button>
+    </div>
   </section>
 
   <script>
@@ -165,9 +168,21 @@
         reader.readAsDataURL(file);
       }
     });
-    document.getElementById('logout-btn').addEventListener('click', function() {
+
+    function logout() {
+      // Close the current page and redirect to index.html
       window.location.href = 'index.html';
-    });
+      // Prevent access to this page after logout
+      localStorage.removeItem('isLoggedIn');
+    }
+
+    // Check if the user is logged in
+    window.onload = function() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (!isLoggedIn) {
+        window.location.href = 'index.html'; // Redirect to login page if not logged in
+      }
+    };
   </script>
 </body>
 </html>
