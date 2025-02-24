@@ -177,7 +177,7 @@
     </style>
 </head>
 <body>
-    <div class="back-btn" onclick="window.location.href='my.html'">← back</div>
+    <div class="back-btn" onclick="window.location.href='my.html'">← Back</div>
     <div class="recharge-channel">
         <h1>Recharge Channel</h1>
         <div class="options">
@@ -252,6 +252,7 @@
             const rechargeBtn = document.getElementById('rechargeBtn');
             const orderAmountDiv = document.getElementById('orderAmount');
             const orderAmountInput = document.getElementById('orderAmountInput');
+            const countdownElement = document.getElementById('countdown');
             const selectedOption = document.querySelector('input[name="recharge-option"]:checked').value;
 
             if (selectedOption === 'Bank Transfer') {
@@ -267,6 +268,7 @@
 
                 successMessage.style.display = 'block';
                 rechargeBtn.disabled = true;
+                countdownElement.style.display = 'block';
                 startCountdown();
             } else {
                 alert('Please enter an amount.');
@@ -281,13 +283,13 @@
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
                 countdownElement.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-                countdownElement.style.display = 'block';
 
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
                     localStorage.removeItem('countdownTime');
                     countdownElement.textContent = 'Time expired!';
-                    document.getElementById('rechargeBtn').disabled = false;
+                    countdownElement.style.display = 'none'; // Hide the countdown
+                    document.getElementById('rechargeBtn').disabled = false; // Re-enable the recharge button
                 } else {
                     timeLeft--;
                     localStorage.setItem('countdownTime', timeLeft);
@@ -304,6 +306,7 @@
             if (timeLeft && timeLeft > 0) {
                 startCountdown();
                 document.getElementById('rechargeBtn').disabled = true;
+                document.getElementById('countdown').style.display = 'block';
             }
         });
     </script>
