@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge Channel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+        .recharge-channel {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .recharge-channel h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .recharge-channel .options {
+            margin-bottom: 20px;
+        }
+        .recharge-channel .options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        .recharge-channel .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .recharge-channel .amount-input {
+            margin-bottom: 20px;
+        }
+        .recharge-channel .amount-input label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .recharge-channel .amount-input input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .recharge-channel .recharge-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .recharge-channel .recharge-btn:hover {
+            background-color: #0056b3;
+        }
+        .recharge-channel .recharge-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .recharge-channel .success-message {
+            color: #28a745;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        .recharge-channel .error-message {
+            color: #dc3545;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        .recharge-channel .deposit-address {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recharge-channel .deposit-address .address-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .recharge-channel .deposit-address input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .recharge-channel .deposit-address button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .recharge-channel .deposit-address button:hover {
+            background-color: #0056b3;
+        }
+        .recharge-channel .order-amount {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recharge-channel .order-amount .amount-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .recharge-channel .order-amount input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .recharge-channel .order-amount button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .recharge-channel .order-amount button:hover {
+            background-color: #0056b3;
+        }
+        .recharge-channel .countdown {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        .info-message {
+            font-size: 14px;
+            color: #dc3545;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-btn" onclick="window.location.href='my.html'">← back</div>
+    <div class="recharge-channel">
+        <h1>Recharge Channel</h1>
+        <div class="options">
+            <label>
+                <input type="radio" name="recharge-option" value="USDT" onchange="handleOptionChange()"> USDT (TRC20)
+            </label>
+            <label>
+                <input type="radio" name="recharge-option" value="Bank Transfer" onchange="handleOptionChange()"> Bank Transfer
+            </label>
+        </div>
+        <div class="error-message" id="errorMessage">Not available in your country.</div>
+        <div class="deposit-address" id="depositAddress">
+            <div class="address-container">
+                <input type="text" value="TKGnnFaXcvYMstwTnhE4WdbRqDhfA4w3My" readonly>
+                <button onclick="copyAddress()">Copy</button>
+            </div>
+        </div>
+        <div class="order-amount" id="orderAmount">
+            <div class="amount-container">
+                <input type="text" id="orderAmountInput" readonly>
+                <button onclick="copyOrderAmount()">Copy</button>
+            </div>
+        </div>
+        <div class="amount-input">
+            <label for="amount">Enter Amount (USD):</label>
+            <input type="number" id="amount" placeholder="Enter amount in dollars">
+        </div>
+        <button class="recharge-btn" id="rechargeBtn" onclick="recharge()">Recharge</button>
+        <div class="success-message" id="successMessage">Order Successful!</div>
+        <div class="countdown" id="countdown">Time remaining: 20:00</div>
+    </div>
+    <div class="info-message">
+        <p>1. The payment amount must be the same as the order amount, otherwise it will not be automatically credited.</p>
+        <p>2. If you do not receive the deposit or withdrawal, please consult customer service for other issues.</p>
+    </div>
+
+    <script>
+        let countdownInterval;
+        const countdownTime = 20 * 60; // 20 minutes in seconds
+
+        function handleOptionChange() {
+            const selectedOption = document.querySelector('input[name="recharge-option"]:checked').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const depositAddress = document.getElementById('depositAddress');
+
+            if (selectedOption === 'Bank Transfer') {
+                errorMessage.style.display = 'block';
+                depositAddress.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'none';
+                depositAddress.style.display = 'block';
+            }
+        }
+
+        function copyAddress() {
+            const addressInput = document.querySelector('.deposit-address input');
+            addressInput.select();
+            document.execCommand('copy');
+            alert('Address copied to clipboard!');
+        }
+
+        function copyOrderAmount() {
+            const orderAmountInput = document.getElementById('orderAmountInput');
+            orderAmountInput.select();
+            document.execCommand('copy');
+            alert('Order amount copied to clipboard!');
+        }
+
+        function recharge() {
+            const amountInput = document.getElementById('amount');
+            const successMessage = document.getElementById('successMessage');
+            const rechargeBtn = document.getElementById('rechargeBtn');
+            const orderAmountDiv = document.getElementById('orderAmount');
+            const orderAmountInput = document.getElementById('orderAmountInput');
+            const selectedOption = document.querySelector('input[name="recharge-option"]:checked').value;
+
+            if (selectedOption === 'Bank Transfer') {
+                alert('Bank Transfer is not available in your country.');
+                return;
+            }
+
+            if (amountInput.value) {
+                const rechargeAmount = parseFloat(amountInput.value);
+                const orderAmount = rechargeAmount + 0.5; // Add $0.5 to the recharge amount
+                orderAmountInput.value = `$${orderAmount.toFixed(2)}`; // Display the order amount
+                orderAmountDiv.style.display = 'block'; // Show the order amount section
+
+                successMessage.style.display = 'block';
+                rechargeBtn.disabled = true;
+                startCountdown();
+            } else {
+                alert('Please enter an amount.');
+            }
+        }
+
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            let timeLeft = localStorage.getItem('countdownTime') || countdownTime;
+
+            const updateCountdown = () => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                countdownElement.style.display = 'block';
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    localStorage.removeItem('countdownTime');
+                    countdownElement.textContent = 'Time expired!';
+                    document.getElementById('rechargeBtn').disabled = false;
+                } else {
+                    timeLeft--;
+                    localStorage.setItem('countdownTime', timeLeft);
+                }
+            };
+
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // Check if countdown is active on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const timeLeft = localStorage.getItem('countdownTime');
+            if (timeLeft && timeLeft > 0) {
+                startCountdown();
+                document.getElementById('rechargeBtn').disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
