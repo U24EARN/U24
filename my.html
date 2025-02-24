@@ -11,6 +11,18 @@
   <style>
     body {
       background-color: #f8fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 375px; /* Fixed width for mobile device size */
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
     }
     .header, .bottom-nav {
       background-color: #ffffff;
@@ -75,6 +87,7 @@
       padding: 10px 0;
       border-bottom: 1px solid #e0e0e0;
       align-items: center;
+      cursor: pointer;
     }
     .service-item:last-child {
       border-bottom: none;
@@ -85,75 +98,84 @@
     .bottom-nav .nav-item i {
       font-size: 24px;
     }
+    /* Profile Image Circle */
+    #user-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%; /* Makes the image circular */
+      object-fit: cover; /* Ensures the image fits within the circle */
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header d-flex justify-content-between align-items-center">
-    <div>
-      <input type="file" id="profile-pic" accept="image/*" style="display:none">
-      <img id="user-image" src="m3.jpg" alt="pic" style="width: 40px; border-radius: 50px; cursor: pointer;">
-      <input type="text" id="username" class="ml-2 font-weight-bold border-0" value="enter username">
-      <span class="badge badge-warning ml-2">SVIP</span>
-    </div>
-  </header>
+  <div class="container">
+    <!-- Header -->
+    <header class="header d-flex justify-content-between align-items-center">
+      <div>
+        <input type="file" id="profile-pic" accept="image/*" style="display:none">
+        <img id="user-image" src="m3.jpg" alt="Profile Picture">
+        <input type="text" id="username" class="ml-2 font-weight-bold border-0" value="enter username">
+        <span class="badge badge-warning ml-2">SVIP</span>
+      </div>
+    </header>
 
-  <!-- Balance Card -->
-  <section class="balance-card">
-    <div>
-      <div class="balance-amount">Sh 43253.19</div>
-      <div>≈11.40 usdt</div>
-      <small>Available Balance</small>
-    </div>
-    <div>
-      <div class="balance-amount text-danger">Sh 0</div>
-      <div>≈0.00 usdt</div>
-      <small>Withdrawing</small>
-    </div>
-  </section>
+    <!-- Balance Card -->
+    <section class="balance-card">
+      <div>
+        <div class="balance-amount">Sh 43253.19</div>
+        <div>≈11.40 usdt</div>
+        <small>Available Balance</small>
+      </div>
+      <div>
+        <div class="balance-amount text-danger">Sh 0</div>
+        <div>≈0.00 usdt</div>
+        <small>Withdrawing</small>
+      </div>
+    </section>
 
-  <!-- VIP Section -->
-  <section class="vip-section">
-    <h5>VIP</h5>
-    <p>Expires 2025-10-19</p>
-    <button class="btn btn-light btn-sm">Renew <i class="fas fa-chevron-right"></i></button>
-  </section>
+    <!-- VIP Section -->
+    <section class="vip-section">
+      <h5>VIP</h5>
+      <p>Expires 2025-10-19</p>
+      <button class="btn btn-light btn-sm" onclick="window.location.href='recharge.html'">Renew <i class="fas fa-chevron-right"></i></button>
+    </section>
 
-  <!-- Withdraw and Recharge Buttons -->
-  <section class="withdraw-card">
-    <button class="withdraw-btn" onclick="window.location.href='withdraw.html'">Withdraw</button>
-    <button class="recharge-btn"
-onclick="window.location.href='recharge.html'">Recharge</button>
-  </section>
+    <!-- Withdraw and Recharge Buttons -->
+    <section class="withdraw-card">
+      <button class="withdraw-btn" onclick="window.location.href='withdraw.html'">Withdraw</button>
+      <button class="recharge-btn" onclick="window.location.href='recharge.html'">Recharge</button>
+    </section>
 
-  <!-- My Service Section -->
-  <section class="services-section">
-    <h5>My Service</h5>
-    <div class="service-item">
-      <div><i class="fas fa-chart-line text-warning"></i> My Holdings</div>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="service-item">
-      <div><i class="fas fa-folder text-danger"></i> Collect</div>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="service-item">
-      <div><i class="fas fa-user-friends text-orange"></i> Follow</div>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="service-item">
-      <div><i class="fas fa-headset text-info"></i> Service</div>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="service-item">
-      <div><i class="fas fa-wallet text-primary"></i> Recharge</div>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="d-flex justify-content-between">
-      <button id="back-btn" class="btn btn-secondary btn-block mt-3 mr-2" onclick="window.location.href='home.html'">Back</button>
-      <button id="logout-btn" class="btn btn-danger btn-block mt-3" onclick="window.location.href='index.html'">Logout</button>
-    </div>
-  </section>
+    <!-- My Service Section -->
+    <section class="services-section">
+      <h5>My Service</h5>
+      <div class="service-item">
+        <div><i class="fas fa-chart-line text-warning"></i> My Holdings</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="service-item">
+        <div><i class="fas fa-folder text-danger"></i> Collect</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="service-item" onclick="window.location.href='https://t.me/+5w7hySmYezM0MDA0'">
+        <div><i class="fas fa-user-friends text-orange"></i> Follow</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="service-item" onclick="window.location.href='https://t.me/+5w7hySmYezM0MDA0'">
+        <div><i class="fas fa-headset text-info"></i> Service</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="service-item">
+        <div><i class="fas fa-wallet text-primary"></i> Recharge</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button id="back-btn" class="btn btn-secondary btn-block mt-3 mr-2" onclick="window.location.href='home.html'">Back</button>
+        <button id="logout-btn" class="btn btn-danger btn-block mt-3" onclick="window.location.href='index.html'">Logout</button>
+      </div>
+    </section>
+  </div>
 
   <script>
     document.getElementById('user-image').addEventListener('click', function() {
