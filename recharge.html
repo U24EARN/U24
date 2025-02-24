@@ -13,7 +13,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             position: relative;
         }
@@ -160,19 +160,44 @@
         .recharge-channel .order-amount button:hover {
             background-color: #0056b3;
         }
-        .recharge-channel .countdown {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            margin-top: 20px;
-            display: none;
-        }
         .info-message {
             font-size: 14px;
             color: #dc3545;
             text-align: center;
             max-width: 400px;
             width: 100%;
+        }
+        .orders-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .orders-container h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .order-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .order-item p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .order-item .countdown {
+            font-size: 14px;
+            color: #dc3545;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -207,16 +232,20 @@
         </div>
         <button class="recharge-btn" id="rechargeBtn" onclick="recharge()">Recharge</button>
         <div class="success-message" id="successMessage">Order Successful!</div>
-        <div class="countdown" id="countdown">Time remaining: 20:00</div>
     </div>
     <div class="info-message">
         <p>1. The payment amount must be the same as the order amount, otherwise it will not be automatically credited.</p>
         <p>2. If you do not receive the deposit or withdrawal, please consult customer service for other issues.</p>
     </div>
 
+    <!-- Orders Container -->
+    <div class="orders-container">
+        <h2>Recharge Orders</h2>
+        <div id="ordersList"></div>
+    </div>
+
     <script>
-        let countdownInterval;
-        const countdownTime = 20 * 60; // 20 minutes in seconds
+        let orders = [];
 
         function handleOptionChange() {
             const selectedOption = document.querySelector('input[name="recharge-option"]:checked').value;
@@ -252,7 +281,6 @@
             const rechargeBtn = document.getElementById('rechargeBtn');
             const orderAmountDiv = document.getElementById('orderAmount');
             const orderAmountInput = document.getElementById('orderAmountInput');
-            const countdownElement = document.getElementById('countdown');
             const selectedOption = document.querySelector('input[name="recharge-option"]:checked').value;
 
             if (selectedOption === 'Bank Transfer') {
@@ -268,47 +296,62 @@
 
                 successMessage.style.display = 'block';
                 rechargeBtn.disabled = true;
-                countdownElement.style.display = 'block';
-                startCountdown();
+
+                // Add the order to the list
+                const order = {
+                    id: Date.now(),
+                    amount: orderAmount,
+                    time: new Date().toLocaleTimeString(),
+                    countdown: 20 * 60 // 20 minutes in seconds
+                };
+                orders.push(order);
+                updateOrdersList();
             } else {
                 alert('Please enter an amount.');
             }
         }
 
-        function startCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            let timeLeft = localStorage.getItem('countdownTime') || countdownTime;
+        function updateOrdersList() {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = '';
 
-            const updateCountdown = () => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                countdownElement.textContent = `Time remaining: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            orders.forEach((order, index) => {
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+                orderItem.innerHTML = `
+                    <p>Order ID: ${order.id}</p>
+                    <p>Amount: $${order.amount.toFixed(2)}</p>
+                    <p>Time: ${order.time}</p>
+                    <p class="countdown" id="countdown-${order.id}">Time remaining: ${formatTime(order.countdown)}</p>
+                `;
+                ordersList.appendChild(orderItem);
 
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                    localStorage.removeItem('countdownTime');
-                    countdownElement.textContent = 'Time expired!';
-                    countdownElement.style.display = 'none'; // Hide the countdown
-                    document.getElementById('rechargeBtn').disabled = false; // Re-enable the recharge button
-                } else {
-                    timeLeft--;
-                    localStorage.setItem('countdownTime', timeLeft);
-                }
-            };
-
-            updateCountdown();
-            countdownInterval = setInterval(updateCountdown, 1000);
+                // Start countdown for this order
+                startCountdown(order.id, order.countdown, index);
+            });
         }
 
-        // Check if countdown is active on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const timeLeft = localStorage.getItem('countdownTime');
-            if (timeLeft && timeLeft > 0) {
-                startCountdown();
-                document.getElementById('rechargeBtn').disabled = true;
-                document.getElementById('countdown').style.display = 'block';
-            }
-        });
+        function startCountdown(orderId, countdownTime, index) {
+            const countdownElement = document.getElementById(`countdown-${orderId}`);
+
+            const interval = setInterval(() => {
+                if (countdownTime <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = 'Time expired!';
+                    orders[index].countdown = 0; // Update the order's countdown
+                } else {
+                    countdownTime--;
+                    orders[index].countdown = countdownTime; // Update the order's countdown
+                    countdownElement.textContent = `Time remaining: ${formatTime(countdownTime)}`;
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
     </script>
 </body>
 </html>
