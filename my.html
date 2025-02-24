@@ -166,7 +166,7 @@
         <div><i class="fas fa-headset text-info"></i> Service</div>
         <i class="fas fa-chevron-right"></i>
       </div>
-      <div class="service-item">
+      <div class="service-item" onclick="window.location.href='recharge.html'">
         <div><i class="fas fa-wallet text-primary"></i> Recharge</div>
         <i class="fas fa-chevron-right"></i>
       </div>
@@ -185,12 +185,4 @@
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('user-image').src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  </script>
-</body>
-</html>
+        r
